@@ -1,0 +1,30 @@
+version: '3'
+services:
+  airflow:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow  
+    ports:
+      - "8080:8080"  # Airflow web UI
+    volumes:
+      - "./dags:/opt/airflow/dags"
+      - "./plugins:/opt/airflow/plugins"
+      - "./logs:/opt/airflow/logs"
+    environment:
+      - AIRFLOW__WEBSERVER__RBAC=true
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      #- AIRFLOW__CORE__FERNET_KEY=myFernetKey  # Replace with your own key
+      - AIRFLOW_ADMIN_USERNAME=admin         # Set your desired admin username
+      - AIRFLOW_ADMIN_PASSWORD=admin       # Set your desired admin password
+      - AIRFLOW_ADMIN_EMAIL=admin@example.com   # Set your desired admin email
+      - AIRFLOW_ADMIN_FIRSTNAME=AdminFirst    # Set the first name of the admin
+      - AIRFLOW_ADMIN_LASTNAME=AdminLast      # Set the last name of the admin
+
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
