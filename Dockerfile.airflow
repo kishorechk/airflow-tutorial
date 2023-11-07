@@ -3,7 +3,10 @@ FROM apache/airflow:2.7.2
 
 # Install PostgreSQL client for connecting to the database
 USER root
-RUN apt-get update && apt-get install -y postgresql-client
+RUN apt-get update && apt-get install -y \
+    postgresql-client \ 
+    wget \
+    unzip
 
 # Create an entry point script
 COPY script/entrypoint.sh /entrypoint.sh
@@ -11,6 +14,8 @@ RUN chmod +x /entrypoint.sh
 
 # Switch back to the airflow user
 USER airflow
+
+RUN pip install xlrd
 
 # Specify the custom entry point script
 ENTRYPOINT ["/entrypoint.sh"]

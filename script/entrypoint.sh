@@ -15,7 +15,7 @@ fi
 # Set the Fernet key as an environment variable for Airflow
 export AIRFLOW__CORE__FERNET_KEY="$FERNET_KEY"
 
-# Start the Airflow scheduler
+# Start the Airflow scheduler in the background
 airflow scheduler &
 
 # Start the Airflow webserver

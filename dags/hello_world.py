@@ -6,27 +6,27 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime, timedelta
 
 default_args = {
-    'owner': 'admin'
+    'owner': 'airflow'
 }
 
-def print_hello_world():
-    print('Hello, World!!')
+def hello_world():
+    print('Hello, Airflow!!')
 
 with DAG(
-    dag_id = 'hello_world',
-    description = 'First "Hello, World" DAG!!',
+    dag_id = 'my_first_dag',
+    description = 'First "Hello, Airflow" DAG!!',
     start_date = days_ago(1),
     schedule_interval = '@once'
 ) as dag:
     start = EmptyOperator(
         task_id = 'start'
     )
-    print_hello_world = PythonOperator(
+    hello_task = PythonOperator(
         task_id = 'print_hello_world',
-        python_callable = print_hello_world
+        python_callable = hello_world
     )
     end = EmptyOperator(
         task_id = 'end'
     )
 
-start >> print_hello_world >> end
+start >> hello_task >> end

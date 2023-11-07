@@ -10,6 +10,7 @@ services:
       - "./dags:/opt/airflow/dags"
       - "./plugins:/opt/airflow/plugins"
       - "./logs:/opt/airflow/logs"
+      - "./data:/data"  # Create a new volume for the 'data' directory
     environment:
       - AIRFLOW__WEBSERVER__RBAC=true
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
