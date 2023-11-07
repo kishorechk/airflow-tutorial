@@ -68,7 +68,7 @@ with DAG(
     schedule_interval = '@once'
 ) as dag:
     
-    with TaskGroup('read_processing') as task_group:
+    with TaskGroup('read_cleanup_data') as task_group:
 
         # BashOperator to clean up the 'data' directory
         cleanup_task = BashOperator(
