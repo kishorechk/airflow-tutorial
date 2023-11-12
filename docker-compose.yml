@@ -7,10 +7,10 @@ services:
     ports:
       - "8080:8080"  # Airflow web UI
     volumes:
-      - "./dags:/opt/airflow/dags"
-      - "./plugins:/opt/airflow/plugins"
-      - "./logs:/opt/airflow/logs"
-      - "./data:/data"  # Create a new volume for the 'data' directory
+      - "./dags:/opt/airflow/dags" # Mounting local project directory to share DAGs with Airflow
+      - "./plugins:/opt/airflow/plugins" # Mounting local plugins directory to extend Airflow functionality
+      - "./logs:/opt/airflow/logs"  # Mounting local logs directory to store Airflow task logs
+      - "./data:/data"  # Mounting local 'data' directory to store downloaded and output files
     environment:
       - AIRFLOW__WEBSERVER__RBAC=true
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
@@ -23,9 +23,18 @@ services:
 
     depends_on:
       - postgres
+      - postgres_tutorial
+  
   postgres:
     image: postgres:13
     environment:
       POSTGRES_DB: airflow
       POSTGRES_USER: airflow
       POSTGRES_PASSWORD: airflow
+
+  postgres_tutorial:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: tutorial
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres

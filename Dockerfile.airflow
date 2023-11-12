@@ -15,7 +15,8 @@ RUN chmod +x /entrypoint.sh
 # Switch back to the airflow user
 USER airflow
 
-RUN pip install xlrd
+# Install additional libs to process the data and generate reports
+RUN pip install xlrd matplotlib seaborn
 
 # Specify the custom entry point script
 ENTRYPOINT ["/entrypoint.sh"]
