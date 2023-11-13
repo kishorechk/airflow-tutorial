@@ -53,9 +53,7 @@ def save_employees(**kwargs):
     all_df = ti.xcom_pull(task_ids="transform.read_xls_all_employees")
 
     # Store the concatenated DataFrame in the database
-    all_df.to_sql(
-        "all_employees_aggregated", con=engine, if_exists="replace", index=False
-    )
+    all_df.to_sql("all_employees", con=engine, if_exists="replace", index=False)
 
     print("Employees saved in database")
     return all_df
