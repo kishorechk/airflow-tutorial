@@ -17,7 +17,7 @@ Follow these steps to set up the Airflow environment and run the data pipeline:
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/airflow-data-pipeline.git
+   git clone https://github.com/kishorechk/airflow-tutorial.git
    ```
 
 2. Navigate to the project directory:
@@ -62,6 +62,3 @@ The Directed Acyclic Graph (DAG) for the data pipeline is organized into four ma
 - [Pandas](https://pandas.pydata.org/): Used for data manipulation and cleaning.
 - [Matplotlib](https://matplotlib.org/), [Seaborn](https://seaborn.pydata.org/): Used for data visualization.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
